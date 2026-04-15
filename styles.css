@@ -1,0 +1,85 @@
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+html,
+body {
+  height: 100%;
+  background: #f7f7f7;
+}
+
+body {
+  font-family: ui-monospace, "Cascadia Code", "SF Mono", Menlo, monospace;
+  color: #535353;
+}
+
+#app {
+  min-height: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding: 1rem;
+  position: relative;
+}
+
+#hud {
+  width: 100%;
+  max-width: 800px;
+  display: flex;
+  justify-content: flex-end;
+  gap: 1.5rem;
+  margin-bottom: 0.5rem;
+  font-size: 1rem;
+  letter-spacing: 0.05em;
+  user-select: none;
+}
+
+#hi-label {
+  opacity: 0.85;
+}
+
+#game {
+  display: block;
+  width: 100%;
+  max-width: 800px;
+  height: auto;
+  background: #fff;
+  border: 1px solid #ddd;
+  image-rendering: pixelated;
+  image-rendering: crisp-edges;
+}
+
+#overlay {
+  position: absolute;
+  inset: 0;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  pointer-events: none;
+  gap: 0.5rem;
+  transition: opacity 0.15s ease;
+}
+
+#overlay:not(.visible) {
+  opacity: 0;
+  visibility: hidden;
+}
+
+#overlay.visible {
+  opacity: 1;
+  visibility: visible;
+}
+
+#overlay-title {
+  font-size: 1.1rem;
+  font-weight: 600;
+}
+
+#overlay-hint {
+  font-size: 0.85rem;
+  opacity: 0.75;
+}
