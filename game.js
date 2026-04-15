@@ -254,7 +254,7 @@
     if (checkCollisions()) {
       gameOver = true;
       running = false;
-      showOverlay("Game over — Space to restart", true);
+      showOverlay("Game over — Tap or Space to restart", true);
     }
 
     updateScoreDisplay();
@@ -344,22 +344,25 @@
     rafId = requestAnimationFrame(frame);
   }
 
+  function handlePrimaryAction() {
+    if (!started || gameOver) {
+      resetGame();
+      started = true;
+      running = true;
+      hideOverlay();
+      startLoop();
+      return;
+    }
+    if (dino.onGround) {
+      dino.vy = JUMP_V;
+    }
+  }
+
   window.addEventListener("keydown", (e) => {
     if (e.code === "Space") {
       e.preventDefault();
       if (e.repeat) return;
-
-      if (!started || gameOver) {
-        resetGame();
-        started = true;
-        running = true;
-        hideOverlay();
-        startLoop();
-        return;
-      }
-      if (dino.onGround) {
-        dino.vy = JUMP_V;
-      }
+      handlePrimaryAction();
     } else if (e.code === "ArrowDown") {
       e.preventDefault();
       keys.duck = true;
@@ -372,7 +375,21 @@
     }
   });
 
-  showOverlay("Press Space to start", true);
+  window.addEventListener(
+    "touchstart",
+    (e) => {
+      e.preventDefault();
+      handlePrimaryAction();
+    },
+    { passive: false }
+  );
+
+  window.addEventListener("mousedown", (e) => {
+    if (e.button !== 0) return;
+    handlePrimaryAction();
+  });
+
+  showOverlay("Tap or Space to start", true);
   lastTime = performance.now();
   rafId = requestAnimationFrame(frame);
 })();
