@@ -17,6 +17,7 @@ body {
 
 #app {
   min-height: 100%;
+  width: min(800px, 100vw - 2rem);
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -43,13 +44,20 @@ body {
 
 #game {
   display: block;
-  width: 100%;
+  width: min(800px, 100vw - 2rem);
   max-width: 800px;
   height: auto;
   background: #fff;
   border: 1px solid #ddd;
   image-rendering: pixelated;
   image-rendering: crisp-edges;
+}
+
+@media (max-width: 480px) {
+  #hud {
+    gap: 0.75rem;
+    font-size: 0.9rem;
+  }
 }
 
 #overlay {
